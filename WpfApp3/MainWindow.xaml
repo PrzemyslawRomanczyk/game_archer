@@ -1,0 +1,33 @@
+﻿<Window x:Class="Archer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Archer"
+        Height="450"
+        Width="850"
+        SizeChanged="Window_SizeChanged">
+    <Canvas x:Name="myCanvas" MouseMove="MouseMoveHandler" Background="AliceBlue" MouseLeftButtonUp="Grid_MouseLeftButtonDown" PreviewMouseWheel="MyCanvas_MouseWheel">
+        <Image x:Name="Archer" Source="Archer.png" Stretch="Fill" Canvas.Top="332" Canvas.Left="51" Height="40" Width="30"/>
+        <Image x:Name="Bow" Height="37" Canvas.Left="74" Source="Bow.png" Stretch="Fill" Canvas.Top="332" Width="7"/>
+        <Image x:Name="Arrow" Height="4" Canvas.Left="74" Source="Arrow.png" Stretch="Fill" Canvas.Top="346" Width="18"/>
+        <Image x:Name="Enemy" Height="40" Canvas.Left="804" Source="Enemy.png" Stretch="Fill" Canvas.Top="365" Width="30"/>
+        <Button x:Name="StartButton" Content="Start" Canvas.Left="369" Canvas.Top="191" Width="83" RenderTransformOrigin="0.4,-0.15" Click="StartButtonClick" Height="34"/>
+        <Label x:Name="Shots" Content="" Canvas.Left="10" Canvas.Top="213" RenderTransformOrigin="-0.132,-0.308" Width="137"/>
+        <ProgressBar x:Name="Power" Height="15" Canvas.Left="10" Canvas.Top="390" Width="100"/>
+        <Label x:Name="Result" Content="" Canvas.Left="10" Canvas.Top="243" RenderTransformOrigin="-0.421,1.308" Width="137"/>
+        <Label x:Name="FinalResult" Content="" Canvas.Left="10" Canvas.Top="68" RenderTransformOrigin="0,1.077" Width="154" Height="27"/>
+        <Label x:Name="BestResult" Content="" RenderTransformOrigin="5.368,3.385" Canvas.Left="10" Canvas.Top="100" Width="154"/>
+        <Menu>
+            <MenuItem Header="Help" Width="51" Height="34">
+                <MenuItem Header="Instructions" Click="Instructions"/>
+                <MenuItem Header="About"/>
+                <MenuItem Header="Best Result"/>
+                <MenuItem Header="Close" Click="CloseApp"/>
+            </MenuItem>
+        </Menu>
+        <Image x:Name="Blood" Height="50" Canvas.Left="804" Source="blood-png-transparent-18.png" Stretch="Fill" Canvas.Top="365" Width="39"/>
+        <Label x:Name="Dane" Content="" Canvas.Left="153" Canvas.Top="213" Height="202" Width="211"/>
+    </Canvas>
+</Window>
