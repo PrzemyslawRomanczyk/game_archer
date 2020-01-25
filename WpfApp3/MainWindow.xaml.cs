@@ -26,9 +26,9 @@ namespace Archer
         private double maxDistance;
         private TranslateTransform animatedTranslateTransform;
 
-        private double V0;
+        public double V0;
 
-        private double currentAngle;
+        public double currentAngle;
         private TimeSpan shotTime;
         private Rect r2;
 
@@ -170,12 +170,12 @@ namespace Archer
 
             //// Debug - show calculated values in window.
             Dane.Visibility = Visibility.Hidden;
-            //Dane.Visibility = Visibility.Visible;
-            //Dane.Content = $"Enemy left : {enemyLeft}, Hmax = {h}, Zmax={z}, time: {this.shotTime.TotalMilliseconds}, pointX={point.X}, pointY={point.Y}";
-            //foreach (var item in pBezierSegment.Points)
-            //{
-            //    Dane.Content += Environment.NewLine + $"Point : {item.X}, {item.Y}";
-            //}
+            Dane.Visibility = Visibility.Visible;
+            Dane.Content = $"Enemy left : {enemyLeft}, Hmax = {h}, Zmax={z}, time: {this.shotTime.TotalMilliseconds}, pointX={point.X}, pointY={point.Y}";
+            foreach (var item in pBezierSegment.Points)
+            {
+                Dane.Content += Environment.NewLine + $"Point : {item.X}, {item.Y}";
+            }
 
             pFigure.Segments.Add(pBezierSegment);
             animationPath.Figures.Add(pFigure);
@@ -196,7 +196,7 @@ namespace Archer
             }
         }
         
-        private double CalculateY(double x)
+        public double CalculateY(double x)
         {
             var y = (x * Math.Tan(this.currentAngle)) - Math.Pow(x, 2) / ((2 * Math.Pow(this.V0, 2) * Math.Pow(Math.Cos(this.currentAngle),2)));
             return y;
