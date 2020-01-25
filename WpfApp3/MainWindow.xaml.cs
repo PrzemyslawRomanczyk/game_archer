@@ -182,13 +182,15 @@ namespace Archer
             animationPath.Freeze();
 
             this.ArrowAnimation(animationPath, this.shotTime);
-
+            //Obliczanie rezultatu 
             if (!this.targeted)
             {
                 Result.Content = "Last shot result : Miss!";
+                //Jeśli nie trafimy to nie dodajemy żadnego punktów do naszego wyniku
             }
             else
             {
+                //Jeśli trafimy to dodajemy 100 punktów - siła naszego strzału
                 Result.Content = "Last shot result : Hit!";
                 result += 100 - this.Power.Value;
             }
@@ -199,6 +201,148 @@ namespace Archer
             var y = (x * Math.Tan(this.currentAngle)) - Math.Pow(x, 2) / ((2 * Math.Pow(this.V0, 2) * Math.Pow(Math.Cos(this.currentAngle),2)));
             return y;
         }
+        private void AddEnemy()
+        {
+            Blood.Visibility = Visibility.Hidden;
+            Enemy.Visibility = Visibility.Hidden;
+            Random random = new Random();
+            var x = random.Next((int)(this.ActualWidth * 0.6), (int)(this.ActualWidth * 0.85));
+            var y = random.Next(0, (int)(this.ActualHeight * 0.7));
+            Canvas.SetLeft(Enemy, x);
+            Canvas.SetTop(Enemy, y);
+            Canvas.SetLeft(Blood, x);
+            Canvas.SetTop(Blood, y);
+            this.r2 = new Rect(x, y, Enemy.ActualWidth, Enemy.ActualHeight);
+            Enemy.Visibility = Visibility.Visible;
+        }
 
+        async Task AddEnemyAsync(TimeSpan time)
+        {
+            await new TaskFactory().StartNew(() => Thread.Sleep(time));
+            this.AddEnemy();
+        }
+
+        private void StartActions(TimeSpan time)
+        {
+            this.runFlag = false;
+            StartButton.Visibility = Visibility.Visible;
+            FinalResult.Content = $"Your result: {(int)this.result}.";
+            FinalResult.Visibility = Visibility.Visible;
+            counter = 0;
+
+            if (result > bestResult)
+            {
+                File.WriteAllText(path, $"{this.result}");
+                this.bestResult = result;
+            }
+
+            BestResult.Content = $"Best result : {(int)this.bestResult}";
+            BestResult.Visibility = Visibility.Visible;
+            this.result = 0;
+        }
+
+        private void MyCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (!this.runFlag) { return; }
+            if (e.Delta > 0)
+            {
+                Power.Value += 7;
+            }
+            else if (Power.Value > 0)
+            {
+                Power.Value -= 7;
+            }
+        }
+
+        private void StartButtonClick(object sender, RoutedEventArgs e)
+        {
+            this.runFlag = true;
+            this.AddEnemy();
+            FinalResult.Visibility = Visibility.Hidden;
+            StartButton.Visibility = Visibility.Hidden;
+            BestResult.Visibility = Visibility.Hidden;
+            Result.Visibility = Visibility.Hidden;
+            Shots.Content = $"Remaining shots : 3";
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.PreviousSize.Height == 0) { return; }
+            var resizeValue = e.NewSize.Height / e.PreviousSize.Height;
+            this.ResizeAllElements(resizeValue);
+        }
+
+        private void ResizeAllElements(double resizeValue)
+        {
+            foreach (var x in myCanvas.Children)
+            {
+                this.ResizeElement((FrameworkElement)x, resizeValue);
+            }
+        }
+
+        private void ResizeElement(FrameworkElement frameworkElement, double resizeValue)
+        {
+            frameworkElement.Height = resizeValue * frameworkElement.Height;
+            frameworkElement.Width = resizeValue * frameworkElement.Width;
+            var a = Canvas.GetTop(frameworkElement);
+            var b = Canvas.GetLeft(frameworkElement);
+            Canvas.SetTop(frameworkElement, Canvas.GetTop(frameworkElement) * resizeValue);
+            Canvas.SetLeft(frameworkElement, Canvas.GetLeft(frameworkElement) * resizeValue);
+        }
+
+        private void Instructions(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Targeting: Click left button on Enemy." + Environment.NewLine +
+                "Shot power: Use mouse wheel to increase/decrease power of shot.");
+        }
+
+        public void ArrowAnimation(PathGeometry animationPath, TimeSpan time)
+        {
+            DoubleAnimationUsingPath translateXAnimation = new DoubleAnimationUsingPath
+            {
+                PathGeometry = animationPath,
+                Duration = time,
+                Source = PathAnimationSource.X
+            };
+
+            Storyboard.SetTargetName(translateXAnimation, "AnimatedTranslateTransform");
+            Storyboard.SetTargetProperty(translateXAnimation, new PropertyPath(TranslateTransform.XProperty));
+
+            DoubleAnimationUsingPath translateYAnimation = new DoubleAnimationUsingPath
+            {
+                PathGeometry = animationPath,
+                Duration = time,
+
+                Source = PathAnimationSource.Y
+            };
+
+            Storyboard.SetTargetName(translateYAnimation, "AnimatedTranslateTransform");
+            Storyboard.SetTargetProperty(translateYAnimation, new PropertyPath(TranslateTransform.YProperty));
+
+            Storyboard pathAnimationStoryboard = new Storyboard();
+            pathAnimationStoryboard.Completed += PathAnimationStoryboard_Completed;
+            pathAnimationStoryboard.Children.Add(translateXAnimation);
+            pathAnimationStoryboard.Children.Add(translateYAnimation);
+            this.runFlag = false;
+            pathAnimationStoryboard.Begin(this);
+        }
+
+        private void PathAnimationStoryboard_Completed(object sender, EventArgs e)
+        {
+            this.runFlag = true;
+            if (this.targeted)
+            {
+                Blood.Visibility = Visibility.Visible;
+                if (this.Counter < 2) this.AddEnemyAsync(TimeSpan.FromMilliseconds(300));
+                this.targeted = false;
+            }
+
+            this.Counter++;
+        }
+
+        private void CloseApp(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }
