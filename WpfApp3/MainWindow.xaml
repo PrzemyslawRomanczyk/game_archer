@@ -8,17 +8,29 @@
         Height="450"
         Width="850"
         SizeChanged="Window_SizeChanged">
-    <Canvas x:Name="myCanvas" MouseMove="MouseMoveHandler" Background="AliceBlue" MouseLeftButtonUp="Grid_MouseLeftButtonDown" PreviewMouseWheel="MyCanvas_MouseWheel">
-        <Image x:Name="Archer" Source="Archer.png" Stretch="Fill" Canvas.Top="332" Canvas.Left="51" Height="40" Width="30"/>
+    <Canvas x:Name="myCanvas" MouseMove="MouseMoveHandler" MouseLeftButtonUp="Grid_MouseLeftButtonDown" PreviewMouseWheel="MyCanvas_MouseWheel" Background="#FF435D48">
+        <Image x:Name="Archer" Source="Archer.png" Stretch="Fill" Canvas.Top="336" Canvas.Left="55" Height="40" Width="30"/>
         <Image x:Name="Bow" Height="37" Canvas.Left="74" Source="Bow.png" Stretch="Fill" Canvas.Top="332" Width="7"/>
-        <Image x:Name="Arrow" Height="4" Canvas.Left="74" Source="Arrow.png" Stretch="Fill" Canvas.Top="346" Width="18"/>
+        <Image x:Name="Arrow" Height="4" Canvas.Left="63" Source="Arrow.png" Stretch="Fill" Canvas.Top="348" Width="22"/>
         <Image x:Name="Enemy" Height="40" Canvas.Left="804" Source="Enemy.png" Stretch="Fill" Canvas.Top="365" Width="30"/>
-        <Button x:Name="StartButton" Content="Start" Canvas.Left="369" Canvas.Top="191" Width="83" RenderTransformOrigin="0.4,-0.15" Click="StartButtonClick" Height="34"/>
-        <Label x:Name="Shots" Content="" Canvas.Left="10" Canvas.Top="213" RenderTransformOrigin="-0.132,-0.308" Width="137"/>
-        <ProgressBar x:Name="Power" Height="15" Canvas.Left="10" Canvas.Top="390" Width="100"/>
-        <Label x:Name="Result" Content="" Canvas.Left="10" Canvas.Top="243" RenderTransformOrigin="-0.421,1.308" Width="137"/>
-        <Label x:Name="FinalResult" Content="" Canvas.Left="10" Canvas.Top="68" RenderTransformOrigin="0,1.077" Width="154" Height="27"/>
-        <Label x:Name="BestResult" Content="" RenderTransformOrigin="5.368,3.385" Canvas.Left="10" Canvas.Top="100" Width="154"/>
+        <Button x:Name="StartButton" Content="Start" Canvas.Left="369" Canvas.Top="180" Width="67" RenderTransformOrigin="0.4,-0.15" Click="StartButtonClick" Height="46.012" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF181B16" BorderBrush="{x:Null}" FontWeight="Bold" FontSize="16">
+            <Button.Background>
+                <ImageBrush ImageSource="blood.jpg"/>
+            </Button.Background>
+        </Button>
+        <Label x:Name="Shots" Content="" Canvas.Left="10" Canvas.Top="213" RenderTransformOrigin="-0.132,-0.308" Width="137" FontWeight="Bold" FontSize="20"/>
+        <ProgressBar x:Name="Power" Height="15" Canvas.Left="10" Canvas.Top="390" Width="100" BorderThickness="0,1,1,1">
+            <ProgressBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="1"/>
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF6B9EA6" Offset="0.749"/>
+                </LinearGradientBrush>
+            </ProgressBar.Background>
+        </ProgressBar>
+        <Label x:Name="Result" Content="" Canvas.Left="10" Canvas.Top="243" RenderTransformOrigin="-0.421,1.308" Width="137" FontWeight="Bold" FontSize="20"/>
+        <Label x:Name="FinalResult" Content="" Canvas.Left="10" Canvas.Top="68" RenderTransformOrigin="0,1.077" Width="154" Height="27" FontWeight="Bold" FontSize="20" Background="Transparent"/>
+        <Label x:Name="BestResult" Content="" RenderTransformOrigin="5.368,3.385" Canvas.Left="10" Canvas.Top="100" Width="154" FontWeight="Bold" FontSize="20"/>
         <Menu>
             <MenuItem Header="Help" Width="51" Height="34">
                 <MenuItem Header="Instructions" Click="Instructions"/>

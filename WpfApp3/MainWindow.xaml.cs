@@ -40,7 +40,7 @@ namespace Archer
             }
             set
             {
-                counter ++;
+                counter++;
                 Shots.Content = $"Remaining shots : {3 - counter}";
                 if (counter > 2)
                 {
@@ -62,7 +62,7 @@ namespace Archer
             double.TryParse(File.ReadAllText(path), out this.bestResult);
             WindowState = WindowState.Maximized;
             WindowStyle = WindowStyle.None;
-            var resizeValue =  SystemParameters.PrimaryScreenHeight/ this.Height;
+            var resizeValue = SystemParameters.PrimaryScreenHeight / this.Height;
             this.ResizeAllElements(resizeValue);
             Blood.Visibility = Visibility.Hidden;
             NameScope.SetNameScope(this, new NameScope());
@@ -79,11 +79,11 @@ namespace Archer
             var rotateTransform = this.CalculateAngle(e, left, top);
             Bow.RenderTransform = rotateTransform;
             Arrow.RenderTransform = rotateTransform;
-     
+
         }
 
         private RotateTransform CalculateAngle(MouseEventArgs e, double x, double y)
-        { 
+        {
             Point point = e.GetPosition(this);
             double dy = (point.Y - y);
             double dx = (point.X - x);
@@ -107,7 +107,6 @@ namespace Archer
             var arrowLeft = Canvas.GetLeft(Arrow);
 
             Arrow.RenderTransform = animatedTranslateTransform;
-            
             this.currentAngle = Math.Atan2(point.Y - arrowTop, point.X - arrowLeft);
             if (this.currentAngle > 1.57 || this.currentAngle < -1.57) return;
 
@@ -155,7 +154,7 @@ namespace Archer
                     listOfFunctionPoints = listOfFunctionPoints.Take(index).ToList();
                 }
 
-                listOfFunctionPoints.Add(-enemyLeft);          
+                listOfFunctionPoints.Add(-enemyLeft);
             }
 
             this.shotTime = TimeSpan.FromSeconds(listOfFunctionPoints.Max() / z * this.shotTime.TotalSeconds);
@@ -165,17 +164,17 @@ namespace Archer
             PolyBezierSegment pBezierSegment = new PolyBezierSegment();
             foreach (double pointX in listOfFunctionPoints)
             {
-                pBezierSegment.Points.Add(new Point(-pointX, -this.CalculateY(pointX)));    
+                pBezierSegment.Points.Add(new Point(-pointX, -this.CalculateY(pointX)));
             }
 
             //// Debug - show calculated values in window.
-            Dane.Visibility = Visibility.Hidden;
-            Dane.Visibility = Visibility.Visible;
-            Dane.Content = $"Enemy left : {enemyLeft}, Hmax = {h}, Zmax={z}, time: {this.shotTime.TotalMilliseconds}, pointX={point.X}, pointY={point.Y}";
-            foreach (var item in pBezierSegment.Points)
-            {
-                Dane.Content += Environment.NewLine + $"Point : {item.X}, {item.Y}";
-            }
+            //Dane.Visibility = Visibility.Hidden;
+           // Dane.Visibility = Visibility.Visible;
+            //Dane.Content = $"Enemy left : {enemyLeft}, Hmax = {h}, Zmax={z}, time: {this.shotTime.TotalMilliseconds}, pointX={point.X}, pointY={point.Y}";
+            //foreach (var item in pBezierSegment.Points)
+            //{
+             //   Dane.Content += Environment.NewLine + $"Point : {item.X}, {item.Y}";
+            //}
 
             pFigure.Segments.Add(pBezierSegment);
             animationPath.Figures.Add(pFigure);
@@ -195,10 +194,10 @@ namespace Archer
                 result += 100 - this.Power.Value;
             }
         }
-        
+
         public double CalculateY(double x)
         {
-            var y = (x * Math.Tan(this.currentAngle)) - Math.Pow(x, 2) / ((2 * Math.Pow(this.V0, 2) * Math.Pow(Math.Cos(this.currentAngle),2)));
+            var y = (x * Math.Tan(this.currentAngle)) - Math.Pow(x, 2) / ((2 * Math.Pow(this.V0, 2) * Math.Pow(Math.Cos(this.currentAngle), 2)));
             return y;
         }
         private void AddEnemy()

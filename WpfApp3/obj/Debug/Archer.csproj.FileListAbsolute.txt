@@ -40,3 +40,17 @@ C:\Users\Przemek\Documents\GitHub\game_archer\WpfApp3\obj\Debug\Archer.csproj.Ge
 C:\Users\Przemek\Documents\GitHub\game_archer\WpfApp3\obj\Debug\Archer.csproj.CoreCompileInputs.cache
 C:\Users\Przemek\Documents\GitHub\game_archer\WpfApp3\obj\Debug\WpfApp3.exe
 C:\Users\Przemek\Documents\GitHub\game_archer\WpfApp3\obj\Debug\WpfApp3.pdb
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\bin\Debug\WpfApp3.exe.config
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\bin\Debug\WpfApp3.exe
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\bin\Debug\WpfApp3.pdb
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\Archer.csprojAssemblyReference.cache
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\MainWindow.baml
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\MainWindow.g.cs
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\App.g.cs
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\WpfApp3_MarkupCompile.cache
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\WpfApp3.g.resources
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\WpfApp3.Properties.Resources.resources
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\Archer.csproj.GenerateResource.cache
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\Archer.csproj.CoreCompileInputs.cache
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\WpfApp3.exe
+C:\Users\Marcin\game_archer\game_archer\WpfApp3\obj\Debug\WpfApp3.pdb
