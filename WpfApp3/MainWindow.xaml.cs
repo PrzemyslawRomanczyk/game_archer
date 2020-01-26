@@ -107,6 +107,7 @@ namespace Archer
             var arrowLeft = Canvas.GetLeft(Arrow);
 
             Arrow.RenderTransform = animatedTranslateTransform;
+
             this.currentAngle = Math.Atan2(point.Y - arrowTop, point.X - arrowLeft);
             if (this.currentAngle > 1.57 || this.currentAngle < -1.57) return;
 
