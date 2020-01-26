@@ -169,13 +169,13 @@ namespace Archer
             }
 
             //// Debug - show calculated values in window.
-            Dane.Visibility = Visibility.Hidden;
-            Dane.Visibility = Visibility.Visible;
-            Dane.Content = $"Enemy left : {enemyLeft}, Hmax = {h}, Zmax={z}, time: {this.shotTime.TotalMilliseconds}, pointX={point.X}, pointY={point.Y}";
-            foreach (var item in pBezierSegment.Points)
-            {
-                Dane.Content += Environment.NewLine + $"Point : {item.X}, {item.Y}";
-            }
+            //Dane.Visibility = Visibility.Hidden;
+           // Dane.Visibility = Visibility.Visible;
+            //Dane.Content = $"Enemy left : {enemyLeft}, Hmax = {h}, Zmax={z}, time: {this.shotTime.TotalMilliseconds}, pointX={point.X}, pointY={point.Y}";
+            //foreach (var item in pBezierSegment.Points)
+            //{
+             //   Dane.Content += Environment.NewLine + $"Point : {item.X}, {item.Y}";
+            //}
 
             pFigure.Segments.Add(pBezierSegment);
             animationPath.Figures.Add(pFigure);
